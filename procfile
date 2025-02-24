@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn mticket.wsgi --log-file -
+web: python manage.py migrate && gunicorn mticket.wsgi:application --log-file -
