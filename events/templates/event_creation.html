@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - MTicket</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/event_creation.css' %}">
+</head>
+
+<body>
+    {% if messages %}
+    <div class="messages" id="message-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="MTicket Logo">
+            Ticket Bot
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'services' %}" class="active">Services</a></li>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+
+            {% elif not user.manager %}
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            {% endif %}
+            <li><a href="{% url 'events:event_list' %}">Events</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="content-overlay"></div>
+        <div class="form-container">
+            <h2>Create New Event</h2>
+            {% if messages %}
+            <div class="alert alert-info">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Error:</strong> Please fix the errors below.
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                        <li>{{ field }}: {{ errors|join:", " }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="eventTitle">Event Title</label>
+                    <input type="text" id="eventTitle" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDescription">Description</label>
+                    <textarea id="eventDescription" name="description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventType">Event Type</label>
+                    <select id="eventType" name="event_type" required>
+                        <option value="">Select Event Type</option>
+                        <option value="conference">Conference</option>
+                        <option value="concert">Concert</option>
+                        <option value="sports">Sports</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventLocation">Location</label>
+                    <input type="text" id="eventLocation" name="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventImage">Event Image</label>
+                    <input type="file" id="eventImage" name="image" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="startDate">Start Date and Time</label>
+                    <input type="datetime-local" id="startDate" name="start_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endDate">End Date and Time</label>
+                    <input type="datetime-local" id="endDate" name="end_date" required>
+                </div>
+
+                <!-- Ticket Categories Section -->
+                <div class="ticket-categories">
+                    <h3>Ticket Categories</h3>
+                    <div class="button-group">
+                        <button type="button" id="addCategory" class="btn btn-secondary">Add Ticket Category</button>
+                    </div>
+
+                </div>
+                <button type="submit" class="create-btn">Create Event</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-section about">
+            <h3>About Us</h3>
+            <p>
+                Ticket Bot is committed to transforming event management through innovative technology, delivering
+                hassle-free solutions for all types of events.
+            </p>
+            <p>Copyright © 2025 Ticket Bot</p>
+        </div>
+        <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'services' %}">Services</a></li>
+                <li><a href="#">Events</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h3>Contact Info</h3>
+            <p>Email: support@mticket.com</p>
+            <p>Phone: +91 7075915855</p>
+            <p>Address: Hyderabad, Telangana</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('addCategory').addEventListener('click', function () {
+            const ticketCategories = document.querySelector('.ticket-categories');
+            const categoryCount = ticketCategories.getElementsByClassName('ticket-category').length + 1;
+
+            // Collapse all existing categories before adding a new one
+            document.querySelectorAll('.ticket-category').forEach(category => {
+                category.classList.add('collapsed');
+            });
+
+            // Create a new category with collapsible behavior
+            const newCategory = document.createElement('div');
+            newCategory.className = 'ticket-category';
+            newCategory.id = `ticketCategory${categoryCount}`;
+            newCategory.innerHTML = `
+        <div class="category-header">
+            <h4>Ticket Category ${categoryCount}</h4>
+            <button type="button" class="toggleCategory btn btn-secondary">Toggle</button>
+        </div>
+        <div class="category-content">
+            <div class="form-group">
+                <label for="ticketType${categoryCount}">Ticket Type</label>
+                <select id="ticketType${categoryCount}" name="ticket_type[]" required>
+                    <option value="normal">Normal</option>
+                    <option value="vip">VIP</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ticketName${categoryCount}">Ticket Name</label>
+                <input type="text" id="ticketName${categoryCount}" name="ticket_name[]" required>
+            </div>
+            <div class="form-group">
+                <label for="ticketQuantity${categoryCount}">Ticket Quantity</label>
+                <input type="number" id="ticketQuantity${categoryCount}" name="ticket_quantity[]" required>
+            </div>
+            <div class="form-group">
+                <label for="ticketPrice${categoryCount}">Price per Ticket</label>
+                <input type="number" step="0.01" id="ticketPrice${categoryCount}" name="ticket_price[]" required>
+            </div>
+            <div class="form-group">
+                <label for="additionalFee${categoryCount}">Additional Fee</label>
+                <input type="number" step="0.01" id="additionalFee${categoryCount}" name="additional_fee[]">
+            </div>
+            <div class="form-group">
+                <label for="ticketSaleStart${categoryCount}">Tickets Available From</label>
+                <input type="datetime-local" id="ticketSaleStart${categoryCount}" name="ticket_sale_start[]" required>
+            </div>
+            <div class="form-group">
+                <label for="ticketSaleEnd${categoryCount}">Tickets Available Until</label>
+                <input type="datetime-local" id="ticketSaleEnd${categoryCount}" name="ticket_sale_end[]" required>
+            </div>
+            <div class="form-group">
+                <label for="minPurchase${categoryCount}">Minimum Ticket Purchase</label>
+                <input type="number" id="minPurchase${categoryCount}" name="min_purchase[]" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="maxPurchase${categoryCount}">Maximum Ticket Purchase</label>
+                <input type="number" id="maxPurchase${categoryCount}" name="max_purchase[]" required>
+            </div>
+            <button type="button" class="removeCategory btn btn-danger">Remove Category</button>
+        </div>
+    `;
+
+            // Append the new category to the ticket categories
+            ticketCategories.appendChild(newCategory);
+        });
+
+        // Toggle category collapse/expand
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('toggleCategory')) {
+                const categoryContent = event.target.closest('.ticket-category').querySelector('.category-content');
+                categoryContent.classList.toggle('collapsed');
+            }
+
+            // Remove a category
+            if (event.target.classList.contains('removeCategory')) {
+                const categoryToRemove = event.target.closest('.ticket-category');
+                if (categoryToRemove) {
+                    categoryToRemove.remove();
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const messageContainer = document.getElementById('message-container');
+            if (messageContainer) {
+                setTimeout(() => {
+                    messageContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        messageContainer.remove();
+                    }, 500); // Wait for the fade-out transition to complete
+                }, 2000); // Show for 2 seconds
+            }
+        });
+
+    </script>
+</body>
+
+</html>

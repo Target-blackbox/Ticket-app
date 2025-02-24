@@ -1,0 +1,316 @@
+/* General Styles for Profile Page */
+body {
+    font-family: 'Lato', sans-serif;
+    background: url('/static/images/bg.png') center/cover no-repeat;
+    color: #1E1E1E;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Adjust alignment */
+    height: auto; /* Allow content to grow */
+    min-height: 100vh;
+    margin: 0;
+    padding: 50px 0;
+    overflow-x: hidden;
+}
+.overlay {
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(69, 100, 177, 0.42); /* Choose your desired color and opacity */
+    z-index: 1; /* Ensure it is below the profile container */
+}
+
+/* Profile Container */
+.profile-container {
+    position: relative;
+    width: 700px;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    overflow: auto;
+    z-index: 2;
+}
+
+/* Headings */
+.profile-container h1 {
+    color: #1E1E1E;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    display: block;
+}
+
+/* Form Elements */
+.info-box {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+.form-box {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+button {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 80%;
+}
+
+/* Button Styles */
+button {
+    background-color: #FF6200;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: bold;
+    width: 50%;
+    margin:10px auto;
+}
+
+button:hover {
+    background-color: #F9000A;
+    transform: scale(1.05);
+}
+
+/* Home Button */
+.home-btn {
+    background-color: #FF6200;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    top: 80px;
+    left: 300px;
+    z-index: 10;
+}
+
+/* Register Section */
+.register-text {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.register-text a {
+    color: #F9000A;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Bookings Section */
+.bookings {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.bookings h2 {
+    font-family: 'Playfair Display', serif;
+    color: #1E1E1E;
+    margin-bottom: 15px;
+    font-size: 24px;
+    background-color: white;
+    padding: 5px 15px; 
+    display: inline-block; 
+    border-radius: 6px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Individual Event Booking Group */
+.event-booking-group {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 600px;
+    text-align: left;
+    position: relative;
+}
+
+/* Event Title */
+.event-booking-group h3 {
+    color: #FF6200;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Table for Tickets */
+.ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.ticket-table th,
+.ticket-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.ticket-table th {
+    background: #FF6200;
+    color: white;
+    font-weight: bold;
+}
+
+.ticket-table tr:last-child td {
+    border-bottom: none;
+}
+.u-btn{
+    background-color: #F9000A;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.u-btn:hover{
+    background-color: #C70000;
+    transform: scale(1.05);
+}
+
+/* Cancel Button */
+.cancel-btn {
+    background-color: #F9000A;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cancel-btn:hover {
+    background-color: #C70000;
+    transform: scale(1.05);
+}
+
+/* No Tickets Message */
+.no-tickets {
+    font-size: 16px;
+    font-weight: bold;
+    color: #888;
+    margin-top: 10px;
+}
+
+.event-group {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ticket-box {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+
+/* Style for the cancel dropdown */
+select[name="cancel_count"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: white;
+    transition: border-color 0.3s ease-in-out;
+}
+
+select[name="cancel_count"]:hover,
+select[name="cancel_count"]:focus {
+    border-color: #FF6200;
+    outline: none;
+}
+
+/* Style for the cancel button */
+button[type="submit"] {
+    background-color: #F9000A;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-left: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #D00000;
+}
+
+.messages-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    max-width: 500px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 4.5s forwards;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.alert-success {
+    background-color: rgba(232, 245, 233, 0.95);
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.alert-error {
+    background-color: rgba(255, 235, 238, 0.95);
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.alert-info {
+    background-color: rgba(227, 242, 253, 0.95);
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+}

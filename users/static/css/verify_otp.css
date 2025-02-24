@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/static/images/bg.png');  /* Use the same background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+}
+
+.otp-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.otp-card h2 {
+    color: #2d3436;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+
+.otp-card p {
+    color: #636e72;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.timer-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#timer {
+    color: #0984e3;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #dfe6e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #74b9ff;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: #FF6200;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #0870c0;
+}
+
+.submit-btn:disabled {
+    background: #b2bec3;
+    cursor: not-allowed;
+}
+
+/* Message styles */
+.messages {
+    margin-bottom: 1.5rem;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.alert-success {
+    background-color: #d4f5e2;
+    color: #00b894;
+    border: 1px solid #00b894;
+}
+
+.alert-error {
+    background-color: #ffe3e3;
+    color: #d63031;
+    border: 1px solid #d63031;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .otp-card {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .otp-card h2 {
+        font-size: 1.5rem;
+    }
+}

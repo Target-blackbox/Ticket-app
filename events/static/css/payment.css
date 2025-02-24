@@ -1,0 +1,129 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Page title */
+h2 {
+    color: #222;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #ff6200;
+    color: white;
+}
+
+td {
+    background-color: #fafafa;
+}
+
+/* Attendee Form */
+form {
+    background: white;
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+}
+
+/* Checkout Section */
+.checkout-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+#payButton {
+    background-color: #ff6200;
+    color: white;
+    font-weight: bold;
+}
+
+#payButton:hover {
+    background-color: #e55a00;
+}
+
+#cancelButton {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+#cancelButton:hover {
+    background-color: #d43a3a;
+}
+
+/* Timer */
+#timer {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff6200;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
+    form {
+        width: 90%;
+    }
+
+    .checkout-section {
+        flex-direction: column;
+    }
+}

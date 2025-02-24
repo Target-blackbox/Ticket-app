@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Ticket Bot</title>
+  <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/about.css' %}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.png' %}" alt="Logo">
+      Ticket Bot
+    </div>
+
+    <ul>
+      <li><a href="{% url 'home' %}" >Home</a></li>
+      <li><a href="{% url 'about' %}" class="active">About</a></li>
+      <li><a href="{% url 'services' %}">Services</a></li>
+      {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+          <li><a href="{% url 'admin:index' %}">Admin</a></li>
+        {% elif not user.manager %}
+          <li><a href="{% url 'profile' %}">Profile</a></li>
+        {% endif %}
+        <li><a href="{% url 'events:event_list' %}">Events</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <h1>Get to Know Us</h1>
+  </section>
+
+  <!-- Story & Mission Section -->
+  <section class="story-mission">
+    <div class="container">
+      <div class="text">
+        <h2>Our Story &amp; Mission</h2>
+        <p>
+          At Mticket, we are committed to revolutionizing the ticketing experience with innovative solutions that simplify and enhance the process. Founded with the goal of transforming how people book and manage tickets, our journey has been marked by a dedication to excellence and customer satisfaction.
+        </p>
+
+        <p>
+          Since our inception, we have specialized in developing cutting-edge ticketing systems for various industries, including museums and events. Our success stories speak volumes about our impact; for instance, we've streamlined the ticket booking process for numerous museums, providing them with robust solutions that handle high volumes and integrate seamlessly with payment gateways.
+        </p>
+      </div>
+      <div class="image">
+        <img src="{% static 'images/m-1.png' %}" alt="Museum Exhibit">
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- Core Values Section -->
+  <section class="core-values">
+    <h2>Our Core Values</h2>
+    <div class="container">
+      <div class="values-text">
+        <h3>Our Core Purpose &amp; Future Goals</h3>
+        <div class="mission">
+          <h4>Our Mission</h4>
+          <p>
+            We aim to revolutionize the ticketing industry by providing innovative, user-friendly solutions that simplify the booking process. Our mission is to deliver exceptional service and technology, enhancing efficiency and user satisfaction.
+          </p>
+        </div>
+        <div class="vision">
+          <h4>Our Vision</h4>
+          <p>
+            We envision becoming the leading provider of intelligent ticketing solutions globally, known for our innovation and customer-centric approach. Our goal is to continuously evolve our technology and services to meet the dynamic needs of our clients, setting new industry standards.
+          </p>
+        </div>
+      </div>
+      <div class="image">
+        <img src="{% static 'images/m-2.png' %}" alt="Museum Interior">
+      </div>
+    </div>
+
+
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-section about">
+      <h3>About Us</h3>
+      <p>
+        Ticket Bot is committed to transforming event management through innovative technology, delivering hassle-free solutions for all types of events.
+      </p>
+      <p>Copyright © 2025 Ticket Bot</p>
+    </div>
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+        <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="#">Events</a></li>
+
+      </ul>
+    </div>
+    <div class="footer-section contact">
+      <h3>Contact Info</h3>
+      <p>Email: support@mticket.com</p>
+      <p>Phone: +91 7075915855</p>
+      <p>Address: Hyderabad, Telangana</p>
+    </div>
+  </footer>
+</body>
+</html>

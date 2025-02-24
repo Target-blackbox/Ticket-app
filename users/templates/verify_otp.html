@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="{% static 'css/verify_otp.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="otp-card">
+            <h2>Verify OTP</h2>
+            <p>Please enter the OTP sent to your email</p>
+            <div class="timer-container">
+                <p>Time remaining: <span id="timer">01:00</span></p>
+            </div>
+            
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    {% if 'error' in message.tags or 'success' in message.tags %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
+                </div>
+                <button type="submit" class="submit-btn">Verify OTP</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Timer functionality
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            var countdown = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(countdown);
+                    display.textContent = "OTP Expired";
+                    document.querySelector('button[type="submit"]').disabled = true;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var oneMinute = 60 * 1, // Changed from 60 * 5 to 60 * 1
+                display = document.querySelector('#timer');
+            startTimer(oneMinute, display);
+        };
+    </script>
+</body>
+</html>

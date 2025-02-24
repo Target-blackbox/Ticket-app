@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Tickets</title>
+    <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <h2>Confirm Your Tickets for {{ event.title }}</h2>
+    <div style="text-align: left; margin: 20px;">
+        <button class="modify-btn" onclick="window.location.href='{% url 'events:select_tickets' event.id %}'">
+            Modify Tickets
+        </button>
+    </div>
+
+    {% if ticket_details %}
+    <table border="5">
+        <tr>
+            <th>Ticket Type</th>
+            <th>Quantity</th>
+            <th>Price (₹)</th>
+            <th>Additional Fee (₹)</th>
+            <th>Subtotal (₹)</th>
+        </tr>
+        {% for ticket_info in ticket_details %}
+        <tr>
+            <td><b>{{ ticket_info.ticket.ticket_name }}</b></td>
+            <td>{{ ticket_info.quantity }}</td>
+            <td>₹{{ ticket_info.ticket.price }}</td>
+            <td>₹{{ ticket_info.ticket.additional_fee|default:"0" }}</td>
+            <td>₹{{ ticket_info.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Total Amount: ₹{{ total_amount }}</h3>
+
+    <a href="{% url 'events:payment' event_id=event.id %}" class="proceed-button">Proceed to Payment</a>
+
+
+
+    {% else %}
+    <p>No tickets selected. <a href="{% url 'events:select_tickets' event.id %}">Go back</a> and choose tickets.</p>
+    {% endif %}
+
+</body>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Your Ticket Confirmation</title>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #ff6200;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d9534f;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: #ff6200;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .event-details {
+            background: #fef3e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <h2>🎟 Your Ticket Confirmation 🎟</h2>
+        <p>Thank you for booking! Here are your ticket details:</p>
+
+        <div class="event-details">
+            <h3>Event: {{ event_name }}</h3>
+            <p><strong>Ticket:</strong> {{ ticket_name }} ({{ ticket_type }})</p>
+            <p><strong>Quantity:</strong> {{ quantity }}</p>
+            <p><strong>Total Price:</strong> ₹{{ total_price }}</p>
+            <p><strong>Event Date:</strong> {{ event_date }}</p>
+            <p><strong>Location:</strong> {{ event_location }}</p>
+        </div>
+
+        <p>We look forward to seeing you at the event! 🎉</p>
+        <p class="footer">Need help? Contact us anytime.</p>
+    </div>
+</body>
+
+</html>

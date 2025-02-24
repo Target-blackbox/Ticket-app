@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Bookings</title>
+  <link rel="stylesheet" href="{% static 'css/manager_bookings.css' %}">
+</head>
+<body>
+  <header>
+    <h2>Manager Bookings</h2>
+    <a class="b-btn" href="{% url 'home' %}">Go Back</a>
+  </header>
+
+  <!-- Events Created by the Manager -->
+  <section class="section">
+    <h2>Events Created by You</h2>
+    {% if events %}
+      <ul>
+        {% for event in events %}
+          <li>
+            <strong>{{ event.title }}</strong> - {{ event.start_date|date:"Y-m-d H:i" }} to {{ event.end_date|date:"Y-m-d H:i" }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No events found.</p>
+    {% endif %}
+  </section>
+
+  <!-- Search Filters -->
+  <form method="GET">
+    <label for="event_name">Event Name:</label>
+    <input type="text" id="event_name" name="event_name" value="{{ request.GET.event_name }}">
+    
+    <label for="ticket_type">Ticket Type:</label>
+    <input type="text" id="ticket_type" name="ticket_type" value="{{ request.GET.ticket_type }}">
+    
+    <button type="submit" class="search-btn">Search</button>
+    <button type="button" class="clear-btn" onclick="clearFilters()">Clear</button>
+  </form>
+
+  <!-- Bookings Table -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Ticket Type</th>
+        <th>Attendee</th>
+        <th>Booking Date</th>
+        <th>Quantity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr {% if booking.status == 'canceled' %} style="background-color: #ffcccc;" {% endif %}>
+        <td>{{ booking.event.title }}</td>
+        <td>{{ booking.ticket.ticket_type }}</td>
+        <td>{{ booking.user.username }}</td>
+        <td>{{ booking.created_at }}</td>
+        <td>{{ booking.quantity }}</td>
+        <td>
+          {% if booking.status == 'canceled' %}
+            <span style="color: red;">Canceled</span>
+          {% else %}
+            <span style="color: green;">Active</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6">No bookings found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script>
+    function clearFilters() {
+        window.location.href = window.location.pathname; // Reloads page without query params
+    }
+  </script>
+</body>
+</html>

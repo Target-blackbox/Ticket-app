@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Tickets</title>
+    <link rel="stylesheet" href="{% static 'css/select.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    {% if messages %}
+    <div class="messages" id="message-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<div class="form-container">
+    <button class="b-btn" onclick="window.location.href='{% url 'events:event_detail' event.id %}';">Back</button>
+    <h2>Select Tickets for {{ event.title }}</h2>
+    
+    <p><b><u>Location:</u></b> {{ event.location }}</p>
+    <p><b><u>Start Date:</u></b> {{ event.start_date }}</p>
+
+    <form method="post" action="{% url 'events:select_tickets' event_id=event.id %}" id="ticketForm">
+        {% csrf_token %}
+        <table border="5">
+            <tr>
+                <th>Ticket Type</th>
+                <th>Price</th>
+                <th>Additional Fee</th>
+                <th>Quantity</th>
+                <th>Available</th>
+                <th>Subtotal</th>
+            </tr>
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.ticket_name }}</td>
+                <td>₹{{ ticket.price }}</td>
+                <td>₹{{ ticket.additional_fee|default:"0" }}</td>
+                <td>
+                    <div class="ticket-quantity-wrapper">
+                        <button type="button" class="quantity-btn decrease">−</button>
+                        <input type="number" name="ticket_{{ ticket.id }}" 
+                               min="0" max="{{ ticket.max_purchase }}" 
+                               value="0" class="ticket-quantity" 
+                               data-price="{{ ticket.price }}" 
+                               data-fee="{{ ticket.additional_fee|default:0 }}">
+                        <button type="button" class="quantity-btn increase">+</button>
+                    </div>
+                </td>
+                <td>Total {{ticket.ticket_name}}:{{ ticket.quantity }}</td>
+                <td id="subtotal_{{ ticket.id }}">₹0.00</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Total Amount: ₹<span id="totalAmount">0.00</span></h3>
+
+        <button class ="s-btn" type="submit">Continue</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const ticketInputs = document.querySelectorAll(".ticket-quantity");
+    const totalAmountEl = document.getElementById("totalAmount");
+
+    function updateSubtotal() {
+        let totalAmount = 0;
+
+        ticketInputs.forEach(input => {
+            const quantity = parseInt(input.value) || 0;
+            const price = parseFloat(input.dataset.price);
+            const fee = parseFloat(input.dataset.fee || 0);
+            const subtotal = (price + fee) * quantity;
+
+            document.getElementById(`subtotal_${input.name.split("_")[1]}`).textContent = `₹${subtotal.toFixed(2)}`;
+            totalAmount += subtotal;
+        });
+
+        totalAmountEl.textContent = totalAmount.toFixed(2);
+    }
+
+    ticketInputs.forEach(input => {
+        input.addEventListener("input", updateSubtotal);
+    });
+
+    document.querySelectorAll(".increase").forEach(button => {
+        button.addEventListener("click", function () {
+            let input = this.previousElementSibling;
+            let max = parseInt(input.max);
+            let value = parseInt(input.value) || 0;
+            if (value < max) {
+                input.value = value + 1;
+                updateSubtotal();
+            }
+        });
+    });
+
+    document.querySelectorAll(".decrease").forEach(button => {
+        button.addEventListener("click", function () {
+            let input = this.nextElementSibling;
+            let value = parseInt(input.value) || 0;
+            if (value > 0) {
+                input.value = value - 1;
+                updateSubtotal();
+            }
+        });
+    });
+
+    updateSubtotal(); // Call function on page load to initialize totals
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const messageContainer = document.getElementById('message-container');
+    if (messageContainer) {
+        setTimeout(() => {
+            messageContainer.style.opacity = '0';
+            setTimeout(() => {
+                messageContainer.remove();
+            }, 500); // Wait for the fade-out transition to complete
+        }, 2000); // Show for 2 seconds
+    }
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+/* Global Styles */
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: linear-gradient(to right, #ff5733, #ff8c00);
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  position: relative;
+}
+
+/* Event Details Container */
+.event-details {
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.event-details img {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.event-info {
+  flex: 1;
+}
+
+.event-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.event-info p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Form Styling */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+form button {
+  background-color: #ff5733;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background-color: #d94326;
+}
+
+/* Table Styling */
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background: #ff5733;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+td {
+  font-size: 16px;
+}
+
+/* Canceled Booking Row */
+tr[style*="background-color: #ffcccc"] {
+  background-color: #ffe5e5 !important;
+}
+
+tr[style*="background-color: #ffcccc"] td {
+  color: #d94326;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  table {
+    width: 100%;
+  }
+
+  form {
+    width: 90%;
+  }
+
+  th, td {
+    font-size: 14px;
+  }
+
+  .event-details {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .event-details img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.clear-btn {
+    background-color: #ff5733;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.clear-btn:hover {
+    background-color: #d94326;
+}
+
+.b-btn {
+    background-color: #8a2a17;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    /* Positioning */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    /* Remove underline if wrapped in <a> */
+    text-decoration: none;
+    display: inline-block;
+}
+
+.b-btn:hover {
+    background-color: #ff5733;
+    text-decoration: none;
+}
+
+.section {
+    background-color: rgb(247, 239, 239);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 90%;
+}

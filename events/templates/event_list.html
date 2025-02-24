@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List - MTicket</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/event_list.css' %}"> <!-- Only include event_list.css -->
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+            Ticket Bot
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'services' %}" class="active">Services</a></li>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+            {% elif not user.manager %}
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            {% endif %}
+            <li><a href="{% url 'events:event_list' %}">Events</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </header>
+    {% if messages %}
+    <div class="messages" id="message-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+    <div class="content">
+        <div class="content-overlay"></div>
+        <div class="content-text">
+            <h2>Upcoming Events</h2>
+            <div class="events">
+                <div class="events-grid">
+                    {% for event in events %}
+                    <div class="event-card">
+                        <h3>{{ event.title }}</h3>
+                        <p>{{ event.description }}</p>
+                        <p><b>Location:</b> {{ event.location }}</p>
+                        <p><b>Start:</b> {{ event.start_date }}</p>
+                        <p><b>End:</b> {{ event.end_date }}</p>
+                        <a href="{% url 'events:event_detail' event.id %}">View Details</a>
+                    </div>
+                    {% empty %}
+                    <div class="event-card">
+                        <h3>No events available at the moment.</h3>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-section about">
+            <h3>About Us</h3>
+            <p>
+                Ticket Bot is committed to transforming event management through innovative technology, delivering
+                hassle-free solutions for all types of events.
+            </p>
+            <p>Copyright © 2025 Ticket Bot</p>
+        </div>
+        <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'services' %}">Services</a></li>
+                <li><a href="#">Events</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h3>Contact Info</h3>
+            <p>Email: support@mticket.com</p>
+            <p>Phone: +91 7075915855</p>
+            <p>Address: Hyderabad, Telangana</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+
+<body>
+    
+    <a href="/" class="home-btn">Home</a> <!-- Home button -->
+
+    <div class="overlay"></div>
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+            <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        <div class="user-details">
+            <h2>Profile Information</h2>
+            <div class="info-box">
+                <p><strong>Name:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Phone:</strong> {{ user.userprofile.phone }}</p>
+            </div>
+        </div>
+
+        <!-- Profile Update Form -->
+        <div class="profile-update">
+            <h2>Update Profile Information</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-box">
+                    {{ form.as_p }}
+                </div>
+                <button id="u-btn">Update Profile</button>
+            </form>
+        </div>
+
+        <!-- Bookings Section -->
+
+        <div class="bookings">
+            <h2>Your Bookings</h2>
+
+            {% if user_bookings %}
+            {% for event, bookings in user_bookings.items %}
+            <div class="event-box">
+                <h2>{{ event.title }}</h2>
+                {% for item in bookings %}
+                <div class="ticket-box">
+                    <p>Ticket Type: <b>{{ item.booking.ticket.ticket_type }}</b></p>
+                    <p>Quantity: {{ item.booking.quantity }}</p>
+
+                    <!-- Dropdown for canceling tickets -->
+                    <form method="POST" action="{% url 'events:cancel_booking' item.booking.booking_id %}">
+                        {% csrf_token %}
+                        <label for="cancel_count">Cancel Tickets:</label>
+                        <select name="cancel_count">
+                            {% for i in item.cancel_range %}
+                            <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Cancel</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No tickets booked.</p>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var messages = document.querySelectorAll('.alert');
+                messages.forEach(function(message) {
+                    message.style.display = 'none';
+                });
+            }, 5000); // Messages will disappear after 5 seconds
+        });
+    </script>
+</body>
+
+</html>

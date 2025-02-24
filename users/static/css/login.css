@@ -1,0 +1,337 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/static/images/bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: -1;
+    opacity: 0.7;
+}
+
+
+/* Main container styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.home-link {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #FF6200;
+    border-radius: 10px;
+    padding: 8px;
+    border: none;
+} 
+
+
+.home-link a {
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
+.home-link:hover {    
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.7);
+}
+
+/* Login form card */
+.login-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); 
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    transition: transform 0.3s ease;
+    left: 80%;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Form header */
+.login-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.login-header h1 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Form inputs */
+.form-group {
+    margin-bottom: 1.8rem;
+    padding: auto;
+    width: 93%;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.7rem;
+    color: #34495e;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.form-group input::placeholder {
+    text-align: center;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+}
+
+/* Submit button */
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #FF6200;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.7);
+}
+
+/* Links */
+.links {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.links a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.links a:hover {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+/* Error messages */
+.error-message {
+    color: #ff0000;
+    font-size: 0.8em;
+    margin-top: 5px;
+    min-height: 1em;
+}
+
+input.error {
+    border-color: #ff0000;
+}
+
+/* Flash messages */
+.flash-message {
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.flash-success {
+    background-color: #dff9eb;
+    color: #27ae60;
+    border: 1px solid #a8e6cf;
+}
+
+.flash-error {
+    background-color: #fde8e8;
+    color: #e74c3c;
+    border: 1px solid #f8c9c9;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .login-card {
+        margin: 0.5rem;
+        padding: 1.8rem;
+    }
+    
+    .login-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .submit-btn {
+        padding: 0.9rem;
+    }
+}
+
+
+
+/* Message styling from styles.css */
+.messages {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 4.5s forwards;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.alert-success {
+    background-color: rgba(232, 245, 233, 0.95);
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.alert-error {
+    background-color: rgba(255, 235, 238, 0.95);
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.alert-info {
+    background-color: rgba(227, 242, 253, 0.95);
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Django Form Checkbox Styling */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #dfe6e9;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;  
+    right: 200px;        
+    top: 50%;           
+    transform: translateY(-50%);  
+    background-color: white;
+    transition: all 0.3s ease;
+}
+input[type="checkbox"]:checked {
+    background-color: #0984e3;
+    border-color: #0984e3;
+}
+
+input[type="checkbox"]:checked::before {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"]:hover {
+    border-color: #0984e3;
+}
+
+/* Style the label that Django generates */
+.form-group label[for$="remember_me"] {
+    color: #636e72;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.r-but,.l-but{
+    width: auto;
+    padding: 0.7rem 1.5rem;
+    background-color: #FF6200;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.r-but:hover,
+.l-but:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.7);
+}

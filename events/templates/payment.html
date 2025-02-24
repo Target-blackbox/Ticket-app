@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - MTicket</title>
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+    <h2>Confirm Your Tickets for {{ event.event_name }}</h2>
+
+    <table border="5">
+        <tr>
+            <th>Ticket Type</th>
+            <th>Quantity</th>
+            <th>Price (₹)</th>
+            <th>Additional Fee (₹)</th>
+            <th>Subtotal (₹)</th>
+        </tr>
+        {% for ticket_info in ticket_details %}
+        <tr>
+            <td>{{ ticket_info.ticket.ticket_name }}</td>
+            <td>{{ ticket_info.quantity }}</td>
+            <td>₹{{ ticket_info.ticket.price }}</td>
+            <td>₹{{ ticket_info.ticket.additional_fee|default:"0" }}</td>
+            <td>₹{{ ticket_info.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Total Amount: ₹{{ total_amount }}</h3>
+
+    <h2>Enter Attendee Details</h2>
+    <form id="attendeeForm" method="post">
+        {% csrf_token %}
+        {% for ticket_info in ticket_details %}
+        {% for i in ticket_info.quantity|default:0|add:"0"|make_list %}
+        <label>Name:</label>
+        <input type="text" name="attendee_name_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" required>
+        <label>Email:</label>
+        <input type="email" name="attendee_email_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" required><br><br>
+        {% endfor %}
+        {% endfor %}
+    </form>
+
+    <div class="checkout-section">
+        <button id="payButton">Proceed to Payment</button>
+        <button id="cancelButton" style="background-color: red; color: white;">Cancel</button>
+        <p id="timer">Time Left: 150s</p>
+    </div>
+
+    <script>
+        let timeLeft = 150;
+        function startTimer() {
+            let timerElement = document.getElementById("timer");
+            let interval = setInterval(() => {
+                timeLeft--;
+                timerElement.innerText = `Time Left: ${timeLeft}s`;
+    
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    alert("Time expired! Redirecting back.");
+                    window.location.href = "{% url 'events:cancel_payment' event.id %}";
+                }
+            }, 1000);
+        }
+    
+        document.getElementById("payButton").onclick = function (e) {
+            e.preventDefault();
+    
+            // Collect attendee form data
+            let formData = new FormData(document.getElementById("attendeeForm"));
+    
+            // Send attendee data to the server before payment
+            fetch("{% url 'events:save_attendee_data' %}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Attendee data sent successfully");
+    
+                    // Proceed with Razorpay Payment
+                    let options = {
+                        "key": "rzp_test_qAWE4Q9HbDwDR5",
+                        "amount": "{{ total_amount|floatformat:2|default:0 }}" * 100,
+                        "currency": "INR",
+                        "name": "MTicket",
+                        "description": "Event Ticket Payment",
+                        "handler": function (response) {
+                            alert("Payment Successful!");
+                            console.log("Payment response:", response);
+                            window.location.href = "{% url 'events:payment_success' %}";
+                        },
+                        "prefill": {
+                            "name": "",
+                            "email": ""
+                        },
+                        "theme": {
+                            "color": "#FF6200"
+                        }
+                    };
+    
+                    let rzp = new Razorpay(options);
+                    rzp.open();
+    
+                } else {
+                    alert("Failed to save attendee data. Please try again.");
+                }
+            }).catch(error => console.log("Error:", error));
+        };
+    
+        startTimer();
+    
+        document.getElementById("cancelButton").onclick = function (e) {
+            e.preventDefault();
+            if (confirm("Are you sure you want to cancel? Your tickets will be restored.")) {
+                window.location.href = "{% url 'events:cancel_payment' event.id %}";
+            }
+        };
+    </script>
+</body>
+
+</html>

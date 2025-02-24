@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Lato', sans-serif;
+    color: #000000;
+    line-height: 1.6;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Translucent background */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Add shadow */
+    position: sticky; /* Ensure navbar stays on top while scrolling */
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px); /* Add blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Support for Safari */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for better separation */
+  }
+  
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    color: #1E1E1E;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar .logo img {
+    width: 30px;
+    margin-right: 10px;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  .navbar ul li {
+    margin-left: 20px;
+  }
+  
+  .navbar ul li a {
+    text-decoration: none;
+    color: #1E1E1E;
+    font-weight: 700;
+  }
+  
+  .navbar ul li a:hover {
+    color: #F9000A;
+  }
+
+  .event-detail-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .event-header {
+    order: 1;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  
+  .event-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #1E1E1E;
+  }
+  
+  .event-header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .event-image {
+    order: 2;
+    text-align: right;
+    max-width: 50%;
+  }
+  
+  .event-image img {
+    max-width: 100%; /* Reduced size */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease; /* Added transition for hover effect */
+  }
+  
+  .event-image img:hover {
+    transform: scale(1.05); /* Added hover effect to scale the image */
+  }
+  
+  .event-tickets {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .event-tickets h2 {
+    font-size: 1.8rem;
+    color: #1E1E1E;
+    margin-bottom: 1rem;
+  }
+  
+  .ticket-card {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+  
+  .ticket-card h3 {
+    font-size: 1.4rem;
+    color: #FF6200;
+  }
+  
+  .ticket-card p {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: #8F91A4;
+    color: rgb(0, 0, 0);
+  }
+  
+  .footer-section {
+    flex: 1;
+    padding: 0rem 1rem;
+  }
+  
+  
+  .footer-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section ul li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+  
+  .footer-section ul li a:hover {
+    color: #F9000A;
+  }
+  
+  .messages {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: 80%;
+      max-width: 600px;
+  }
+  
+  .alert {
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 4.5s forwards;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .alert-success {
+      background-color: rgba(232, 245, 233, 0.95);
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
+  }
+  
+  .alert-error {
+      background-color: rgba(255, 235, 238, 0.95);
+      color: #c62828;
+      border: 1px solid #ffcdd2;
+  }
+  
+  .alert-info {
+      background-color: rgba(227, 242, 253, 0.95);
+      color: #1565c0;
+      border: 1px solid #bbdefb;
+  }
+  
+  @keyframes fadeIn {
+      from {  
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  
+  @keyframes fadeOut {
+      from {
+          opacity: 1;
+      }
+      to {
+          opacity: 0;
+      }
+  }
+
+  .go-back-button {
+    margin-top: 20px; /* Space above the button */
+    text-align: center; /* Center the button */
+  }
+
+  .go-back-button .btn {
+    background-color: #FF6200; /* Button background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+
+  .go-back-button .btn:hover {
+    background-color: #F9000A; /* Darker background on hover */
+  }
+  .n-btn, .v-btn {
+    background-color: #FF6200; /* Button background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s;
+    margin-top: 30px; /* Increased margin to move buttons down */
+    display: inline-block; /* Ensures proper spacing */
+}
+
+.n-btn:hover,
+.v-btn:hover {
+    background-color: #F9000A;
+}

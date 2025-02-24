@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Ticket Bot</title>
+  <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/services.css' %}">
+</head>
+<body>
+
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.png' %}" alt="Logo">
+      Ticket Bot
+    </div>
+
+    <ul>
+      <li><a href="{% url 'home' %}" >Home</a></li>
+      <li><a href="{% url 'about' %}" >About</a></li>
+      <li><a href="{% url 'services' %}" class="active">Services</a></li>
+      {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+          <li><a href="{% url 'admin:index' %}">Admin</a></li>
+        {% elif not user.manager %}
+          <li><a href="{% url 'profile' %}">Profile</a></li>
+        {% endif %}
+        <li><a href="{% url 'events:event_list' %}">Events</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <h1>Explore Our Services</h1>
+  </section>
+
+  
+  <!-- Services Section -->
+  <section class="services">
+    <h2 class="section-title">Enhancing Your Experience</h2>
+    <h3 class="section-subtitle">Tailored Services to Meet Your Needs</h3>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="{% static 'images/bg.png' %}" alt="Custom Website Development">
+        <h4>Custom Website Development</h4>
+        <p>We offer bespoke website development tailored to your specific needs, whether it be for a coaching center or a portfolio, our team creates responsive and visually appealing websites for Businesses, Organizations, and Firms. We ensure that every website we build aligns with your goals while providing an exceptional user experience.</p>
+      </div>
+
+      <div class="service-card">
+        <img src="{% static 'images/bg.png' %}" alt="AI-Powered Solutions">
+        <h4>AI-Powered Solutions</h4>
+        <p>Our AI-driven services include developing advanced systems like chatbot-based ticket booking for museums and AI-powered recommendation engines. Using machine learning models and natural language processing, we enhance the system performance efficiency, customer service, and decision-making.</p>
+      </div>
+
+
+      <div class="service-card">
+        <img src="{% static 'images/bg.png' %}" alt="WordPress Development">
+        <h4>WordPress Development & Customization</h4>
+
+        <p>Our WordPress development services are ideal for businesses looking for flexible and user-friendly website solutions. We specialize in custom theme development, plugins, and fully functional WordPress websites. Meant to your brand needs, whether you need an e-commerce store, a blog, or a corporate site, we ensure your WordPress site is optimized for performance, security, and SEO, helping you achieve your digital goals with ease.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values Section -->
+  
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-section about">
+      <h3>About Us</h3>
+      <p>
+        Ticket Bot is committed to transforming event management through innovative technology, delivering hassle-free solutions for all types of events.
+      </p>
+      <p>Copyright © 2025 Ticket Bot</p>
+    </div>
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+        <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}" class="active">Services</a></li>
+        <li><a href="#">Events</a></li>
+
+      </ul>
+    </div>
+    <div class="footer-section contact">
+      <h3>Contact Info</h3>
+      <p>Email: support@mticket.com</p>
+      <p>Phone: +91 7075915855</p>
+      <p>Address: Hyderabad, Telangana</p>
+    </div>
+  </footer>
+</body>
+</html>

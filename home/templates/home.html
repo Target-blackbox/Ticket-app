@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Bot</title>
+  <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  {% if messages %}
+  <div class="messages">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+      </div>
+      {% endfor %}
+  </div>
+  {% endif %}
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="{% static 'images/logo.png' %}" alt="Logo">
+      Ticket Bot
+    </div>
+    <ul>
+      <li><a href="{% url 'home' %}" class="active">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'services' %}">Services</a></li>
+      {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+          <li><a href="{% url 'admin:index' %}">Admin</a></li>
+        {% elif not user.manager %}
+          <li><a href="{% url 'profile' %}">Profile</a></li>
+        {% endif %}
+        <li><a href="{% url 'events:event_list' %}">Events</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </header>
+
+  <!-- Content Section -->
+  <main class="content">
+    <div class="content-overlay"></div>
+    <div class="content-text">
+      <h1>Seamless Museum Ticketing</h1>
+      <p>Your Gateway to Art, Culture, and Innovation</p> 
+      
+      {% if user.is_authenticated %}
+        {% if user.manager %}
+          <a href="{% url 'events:event_creation' %}" class="btn">Host Event</a>
+          <a href="{% url 'manager_bookings' %}" class="btn">Manage Bookings</a>  <!-- New Button for Managers -->
+        {% else %}
+          <a href="{% url 'events:event_list' %}" class="btn">Explore Events</a>
+        {% endif %}
+      {% else %}
+        <a href="#" class="btn">Explore Events</a>
+      {% endif %}
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-section about">
+      <h3>About Us</h3>
+      <p>
+        Ticket Bot is committed to transforming event management through innovative technology, delivering hassle-free solutions for all types of events.
+      </p>
+      <p>Copyright © 2025 Ticket Bot</p>
+    </div>
+    <div class="footer-section links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="#">Events</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contact">
+      <h3>Contact Info</h3>
+      <p>Email: support@mticket.com</p>
+      <p>Phone: +91 7075915855</p>
+      <p>Address: Hyderabad, Telangana</p>
+    </div>
+  </footer>
+</body>
+</html>
