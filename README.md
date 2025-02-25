@@ -78,12 +78,11 @@ Visit **`http://127.0.0.1:8000/`** in your browser!
 
 ## 📸 Screenshots  
 
-| Home Page | Event Booking | Payment Gateway |
-|-----------|--------------|-----------------|
-| ![Home (3)](https://github.com/user-attachments/assets/77e9f4b7-7b11-4a90-af59-c7f010881849)| ![Booking](https://github.com/user-attachments/assets/207a3f42-590e-44b8-9584-9e49902d5aa7)| ![Payment](https://github.com/user-attachments/assets/04e3b254-9b1a-484d-a469-c7b103c5b923)|
-| About | Events | Login | Register |
-|------|-------|------|---------|
-| ![About](https://github.com/user-attachments/assets/453f85d0-5738-4946-a9a2-247f4dcbaa85)| ![Events](https://github.com/user-attachments/assets/2654b515-e798-4169-8f62-64d0207202a1)| ![Login](https://github.com/user-attachments/assets/0cb12467-2915-4419-b9bb-6c300dda146c)| ![Register](https://github.com/user-attachments/assets/355ce1b8-2d86-4b63-a5db-0659565e7e41)|
+| Home Page | Event Booking | Payment Gateway | Register |
+|-----------|--------------|-----------------|----------|
+| ![Home (3)](https://github.com/user-attachments/assets/77e9f4b7-7b11-4a90-af59-c7f010881849)| ![Booking](https://github.com/user-attachments/assets/207a3f42-590e-44b8-9584-9e49902d5aa7)| ![Payment](https://github.com/user-attachments/assets/04e3b254-9b1a-484d-a469-c7b103c5b923)| ![Register](https://github.com/user-attachments/assets/355ce1b8-2d86-4b63-a5db-0659565e7e41)|
+| About | Events | Login |
+| ![About](https://github.com/user-attachments/assets/453f85d0-5738-4946-a9a2-247f4dcbaa85)| ![Events](https://github.com/user-attachments/assets/2654b515-e798-4169-8f62-64d0207202a1)| ![Login](https://github.com/user-attachments/assets/0cb12467-2915-4419-b9bb-6c300dda146c)| 
 
 
 
