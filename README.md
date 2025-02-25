@@ -1,7 +1,7 @@
 # 🎟️ mTicket - Smart Ticket Booking System
 
 <p align="center" style="display: flex; align-items: center; justify-content: center;">
-  <img src="https://mticket.pythonanywhere.com/static/images/logo.png" alt="mTicket Logo" width="30" style="margin-right: 8px;">
+  <img src="https://mticket.pythonanywhere.com/static/images/logo.png" alt="mTicket Logo" width="30">
   <b style="font-size: 20px;">TicketBot</b>
 </p>
 
