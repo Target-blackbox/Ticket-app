@@ -1,6 +1,7 @@
 # 🎟️ mTicket - Smart Ticket Booking System
 
-![image-removebg-preview (7)](https://github.com/user-attachments/assets/57b3a0b5-bda3-4fd4-806e-7d9d95749f11)
+![image](https://github.com/user-attachments/assets/dc755e0a-b142-461e-8576-cd1002f9396c)
+
 
 
 
