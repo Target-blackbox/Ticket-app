@@ -1,9 +1,8 @@
 # 🎟️ mTicket - Smart Ticket Booking System
 
-<p align="center">
-  <img src="https://mticket.pythonanywhere.com/static/images/logo.png" alt="mTicket Logo" width="40">
-  <strong style="vertical-align: middle; font-size: 22px;">Ticket Bot</strong>
-</p>
+![image-removebg-preview (7)](https://github.com/user-attachments/assets/57b3a0b5-bda3-4fd4-806e-7d9d95749f11)
+
+
 
 mTicket is a **smart ticket booking system** designed for seamless **event management and booking**. It allows event managers to create events, sell tickets, and provides users with an easy and secure way to book tickets online.  
 
