@@ -90,33 +90,6 @@ Visit **`http://127.0.0.1:8000/`** in your browser!
 
 ---
 
-## 🛠️ Contribution Guidelines  
-
-Want to contribute? Awesome! Follow these steps:
-
-1. **Fork** the repository 🍴
-2. **Clone** your fork 🔾  
-   ```bash
-   git clone https://github.com/your-username/mTicket.git
-   cd mTicket
-   ```
-3. **Create a new branch** 🔀  
-   ```bash
-   git checkout -b feature-branch
-   ```
-4. **Make your changes & commit** 🛠️  
-   ```bash
-   git add .
-   git commit -m "Added new feature"
-   ```
-5. **Push and create a Pull Request** 🚀  
-   ```bash
-   git push origin feature-branch
-   ```
-6. Wait for your PR to be reviewed and merged! ✅  
-
----
-
 ## 📄 License
 
 This project is licensed under the **MIT License**.
