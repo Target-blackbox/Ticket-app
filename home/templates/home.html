@@ -59,7 +59,7 @@
           <a href="{% url 'events:event_list' %}" class="btn">Explore Events</a>
         {% endif %}
       {% else %}
-        <a href="#" class="btn">Explore Events</a>
+        <a href="{% url 'login' %}" class="btn">Explore Events</a>
       {% endif %}
     </div>
   </main>
@@ -79,7 +79,7 @@
         <li><a href="{% url 'home' %}" class="active">Home</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'services' %}">Services</a></li>
-        <li><a href="#">Events</a></li>
+        <li><a href="{% url 'events:event_list' %}">Events</a></li>
       </ul>
     </div>
     <div class="footer-section contact">

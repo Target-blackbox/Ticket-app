@@ -3,14 +3,14 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
     text-align: center;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 /* Header Styling */
 h2 {
     color: #FF6200;
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 /* Ticket Table Styling */
@@ -19,14 +19,14 @@ table {
     margin: auto;
     border-collapse: collapse;
     background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
     overflow: hidden;
 }
 
 th, td {
-    padding: 15px;
-    border: 2px solid #FF6200;
+    padding: 0.9375rem;
+    border: 0.125rem solid #FF6200;
     text-align: center;
 }
 
@@ -49,16 +49,17 @@ td:nth-child(5) {
 h3 {
     color: #F9000A;
     font-size: 1.8rem;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
+
 .modify-btn {
     background-color: #FF6200;
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 0.75rem 1.25rem;
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -67,17 +68,16 @@ h3 {
     background-color: #F9000A;
 }
 
-
 /* Payment Button */
 .btn {
     display: inline-block;
-    padding: 12px 25px;
+    padding: 0.75rem 1.5625rem;
     background-color: #FF6200;
     color: white;
     font-size: 1.2rem;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
+    border-radius: 0.3125rem;
+    margin-top: 1.25rem;
     transition: 0.3s ease;
 }
 
@@ -104,16 +104,93 @@ p a:hover {
 
 .proceed-button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     background-color: #ff6200;
     color: white;
     text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
+    font-size: 1.125rem;
+    border-radius: 0.3125rem;
     text-align: center;
     transition: 0.3s;
 }
 
 .proceed-button:hover {
     background-color: #e05500;
+}
+
+/* Responsive Design */
+@media (max-width: 48rem) { /* 768px */
+    body {
+        padding: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    table {
+        width: 95%;
+    }
+    
+    th, td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    th {
+        font-size: 1rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+    
+    .modify-btn,
+    .btn,
+    .proceed-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 30rem) { /* 480px */
+    body {
+        padding: 0.75rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+    th, td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    th {
+        font-size: 0.9rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    .modify-btn,
+    .btn,
+    .proceed-button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    p {
+        font-size: 0.9rem;
+    }
 }   

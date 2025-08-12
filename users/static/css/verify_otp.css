@@ -31,13 +31,13 @@ body::before {
 
 .container {
     width: 90%;
-    max-width: 400px;
+    max-width: 25rem;
 }
 
 .otp-card {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
     padding: 2.5rem;
     position: relative;
     z-index: 1;
@@ -75,13 +75,13 @@ body::before {
 input[type="text"] {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid #dfe6e9;
-    border-radius: 8px;
+    border: 0.125rem solid #dfe6e9;
+    border-radius: 0.5rem;
     font-size: 1rem;
     transition: border-color 0.3s ease;
     box-sizing: border-box;
     text-align: center;
-    letter-spacing: 2px;
+    letter-spacing: 0.125rem;
 }
 
 input[type="text"]:focus {
@@ -95,7 +95,7 @@ input[type="text"]:focus {
     background: #FF6200;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
@@ -118,7 +118,7 @@ input[type="text"]:focus {
 
 .alert {
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     position: relative;
     margin-bottom: 1rem;
     font-size: 0.9rem;
@@ -128,17 +128,28 @@ input[type="text"]:focus {
 .alert-success {
     background-color: #d4f5e2;
     color: #00b894;
-    border: 1px solid #00b894;
+    border: 0.0625rem solid #00b894;
 }
 
 .alert-error {
     background-color: #ffe3e3;
     color: #d63031;
-    border: 1px solid #d63031;
+    border: 0.0625rem solid #d63031;
 }
 
 /* Responsive design */
-@media (max-width: 480px) {
+@media (max-width: 48rem) { /* 768px */
+    .container {
+        width: 95%;
+    }
+    
+    .otp-card {
+        padding: 2rem;
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 30rem) { /* 480px */
     .otp-card {
         padding: 1.5rem;
         margin: 1rem;
@@ -146,5 +157,24 @@ input[type="text"]:focus {
 
     .otp-card h2 {
         font-size: 1.5rem;
+    }
+    
+    .otp-card p {
+        font-size: 0.8rem;
+    }
+    
+    input[type="text"] {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+    
+    .submit-btn {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+    
+    .alert {
+        padding: 0.75rem;
+        font-size: 0.8rem;
     }
 }

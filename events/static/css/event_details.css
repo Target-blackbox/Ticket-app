@@ -17,13 +17,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Add shadow */
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.4); /* Add shadow */
     position: sticky; /* Ensure navbar stays on top while scrolling */
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px); /* Add blur effect */
-    -webkit-backdrop-filter: blur(10px); /* Support for Safari */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for better separation */
+    backdrop-filter: blur(0.625rem); /* Add blur effect */
+    -webkit-backdrop-filter: blur(0.625rem); /* Support for Safari */
+    border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.1); /* Subtle border for better separation */
   }
   
   .navbar .logo {
@@ -36,8 +36,8 @@
   }
   
   .navbar .logo img {
-    width: 30px;
-    margin-right: 10px;
+    width: 1.875rem;
+    margin-right: 0.625rem;
   }
   
   .navbar ul {
@@ -46,7 +46,7 @@
   }
   
   .navbar ul li {
-    margin-left: 20px;
+    margin-left: 1.25rem;
   }
   
   .navbar ul li a {
@@ -60,12 +60,12 @@
   }
 
   .event-detail-container {
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 2rem auto;
     padding: 1rem;
     background: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,8 +96,8 @@
   
   .event-image img {
     max-width: 100%; /* Reduced size */
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease; /* Added transition for hover effect */
   }
   
@@ -119,8 +119,8 @@
   .ticket-card {
     background: #f9f9f9;
     padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
   }
   
@@ -137,24 +137,35 @@
   .footer {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 2rem;
     background-color: #8F91A4;
     color: rgb(0, 0, 0);
+    gap: 2rem;
+    flex-wrap: wrap; /* Allow sections to wrap */
   }
   
   .footer-section {
     flex: 1;
-    padding: 0rem 1rem;
+    padding: 0 1rem;
+    min-width: 15rem; /* Minimum width to prevent too narrow sections */
+    max-width: calc(33.333% - 1.33rem); /* Ensure equal width distribution */
   }
-  
   
   .footer-section h3 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .footer-section p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
   }
   
   .footer-section ul {
     list-style: none;
+    padding: 0;
   }
   
   .footer-section ul li {
@@ -164,6 +175,7 @@
   .footer-section ul li a {
     text-decoration: none;
     color: rgb(0, 0, 0);
+    transition: color 0.3s ease;
   }
   
   .footer-section ul li a:hover {
@@ -172,39 +184,39 @@
   
   .messages {
       position: fixed;
-      top: 80px;
+      top: 5rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 1000;
       width: 80%;
-      max-width: 600px;
+      max-width: 37.5rem;
   }
   
   .alert {
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 8px;
+      padding: 0.9375rem;
+      margin-bottom: 0.625rem;
+      border-radius: 0.5rem;
       text-align: center;
       animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 4.5s forwards;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0.125rem 0.625rem rgba(0,0,0,0.1);
   }
   
   .alert-success {
       background-color: rgba(232, 245, 233, 0.95);
       color: #2e7d32;
-      border: 1px solid #c8e6c9;
+      border: 0.0625rem solid #c8e6c9;
   }
   
   .alert-error {
       background-color: rgba(255, 235, 238, 0.95);
       color: #c62828;
-      border: 1px solid #ffcdd2;
+      border: 0.0625rem solid #ffcdd2;
   }
   
   .alert-info {
       background-color: rgba(227, 242, 253, 0.95);
       color: #1565c0;
-      border: 1px solid #bbdefb;
+      border: 0.0625rem solid #bbdefb;
   }
   
   @keyframes fadeIn {
@@ -226,38 +238,194 @@
   }
 
   .go-back-button {
-    margin-top: 20px; /* Space above the button */
+    margin-top: 1.25rem; /* Space above the button */
     text-align: center; /* Center the button */
   }
 
   .go-back-button .btn {
     background-color: #FF6200; /* Button background color */
     color: white; /* Text color */
-    padding: 10px 20px; /* Padding around the text */
+    padding: 0.625rem 1.25rem; /* Padding around the text */
     border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 0.3125rem; /* Rounded corners */
     text-decoration: none; /* Remove underline */
-    font-size: 16px; /* Font size */
+    font-size: 1rem; /* Font size */
     transition: background-color 0.3s; /* Smooth transition for hover effect */
   }
 
   .go-back-button .btn:hover {
     background-color: #F9000A; /* Darker background on hover */
   }
+  
   .n-btn, .v-btn {
     background-color: #FF6200; /* Button background color */
     color: white; /* Text color */
-    padding: 10px 20px; /* Padding around the text */
+    padding: 0.625rem 1.25rem; /* Padding around the text */
     border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 0.3125rem; /* Rounded corners */
     text-decoration: none; /* Remove underline */
-    font-size: 16px; /* Font size */
+    font-size: 1rem; /* Font size */
     transition: background-color 0.3s;
-    margin-top: 30px; /* Increased margin to move buttons down */
+    margin-top: 1.875rem; /* Increased margin to move buttons down */
     display: inline-block; /* Ensures proper spacing */
 }
 
 .n-btn:hover,
 .v-btn:hover {
     background-color: #F9000A;
+}
+
+/* Responsive Design */
+@media (max-width: 48rem) { /* 768px */
+    .navbar {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .navbar ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .navbar ul li {
+        margin-left: 0;
+    }
+    
+    .event-detail-container {
+        flex-direction: column;
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .event-header {
+        order: 2;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    .event-header h1 {
+        font-size: 2rem;
+    }
+    
+    .event-header p {
+        font-size: 1rem;
+    }
+    
+    .event-image {
+        order: 1;
+        text-align: center;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .event-tickets h2 {
+        font-size: 1.5rem;
+    }
+    
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+    
+    .footer-section {
+        padding: 0;
+        width: 100%;
+        min-width: unset; /* Reset min-width for mobile */
+        max-width: 100%; /* Reset max-width for mobile */
+    }
+    
+    .footer-section h3 {
+        margin-bottom: 0.75rem;
+    }
+    
+    .footer-section p {
+        margin-bottom: 0.75rem;
+    }
+    
+    .messages {
+        width: 90%;
+        top: 6rem;
+    }
+}
+
+@media (max-width: 30rem) { /* 480px */
+    .navbar .logo {
+        font-size: 1.2rem;
+    }
+    
+    .navbar .logo img {
+        width: 1.5rem;
+    }
+    
+    .event-detail-container {
+        margin: 0.75rem;
+        padding: 0.75rem;
+    }
+    
+    .event-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .event-header p {
+        font-size: 0.9rem;
+    }
+    
+    .event-tickets h2 {
+        font-size: 1.3rem;
+    }
+    
+    .ticket-card {
+        padding: 0.75rem;
+    }
+    
+    .ticket-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .ticket-card p {
+        font-size: 0.9rem;
+    }
+    
+    .go-back-button .btn,
+    .n-btn, .v-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .messages {
+        width: 95%;
+        top: 7rem;
+    }
+    
+    .footer {
+        padding: 1.5rem 0.75rem;
+        gap: 1.5rem;
+    }
+    
+    .footer-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer-section p {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 0.4rem;
+    }
+    
+    .footer-section ul li a {
+        font-size: 0.9rem;
+    }
+    
+    .alert {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
 }

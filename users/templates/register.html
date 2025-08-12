@@ -21,6 +21,8 @@
     {% endif %}
     <div class="login-container">
         <div class="login-card">
+            <a href="{% url 'home' %}" class="home-link">Home</a>
+            
             <div class="login-header">
                 <h2>Register</h2>
             </div>
@@ -34,13 +36,9 @@
                 {% endfor %}
                 <button type="submit" class="submit-btn">Register</button>
             </form>
-            <button class="home-link">
-                <a href="{% url 'home' %}">
-                    Home
-                </a>
-            </button>
+            
             <p class="register-link">
-                Already have an account? <a class=" l-but "href="{% url 'login' %}">Login here</a>
+                Already have an account? <a class="l-but" href="{% url 'login' %}">Login here</a>
             </p>
         </div>
     </div>

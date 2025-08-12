@@ -18,13 +18,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Add shadow */
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.4); /* Add shadow */
     position: sticky; /* Ensure navbar stays on top while scrolling */
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px); /* Add blur effect */
-    -webkit-backdrop-filter: blur(10px); /* Support for Safari */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for better separation */
+    backdrop-filter: blur(0.625rem); /* Add blur effect */
+    -webkit-backdrop-filter: blur(0.625rem); /* Support for Safari */
+    border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.1); /* Subtle border for better separation */
   }
   
   .navbar .logo {
@@ -38,8 +38,8 @@
   }
   
   .navbar .logo img {
-    width: 30px;
-    margin-right: 10px;
+    width: 1.875rem;
+    margin-right: 0.625rem;
   }
   
   .navbar ul {
@@ -48,7 +48,7 @@
   }
   
   .navbar ul li {
-    margin-left: 20px;
+    margin-left: 1.25rem;
   }
   
   .navbar ul li a {
@@ -67,7 +67,7 @@
     position: relative;
     text-align: center;
     color: white;
-    height: 400px;
+    height: 25rem;
     background: url("/static/images/bg.png") center/cover no-repeat;
   }
   
@@ -115,8 +115,8 @@
   
   .story-mission .image img {
     width: 80%;
-    border-radius: 0 40px 0 40px;
-    height: 300px;
+    border-radius: 0 2.5rem 0 2.5rem;
+    height: 18.75rem;
     object-fit: cover;
     display: block;
     margin: 0 auto;
@@ -165,8 +165,8 @@
   
   .core-values .image img {
     width: 80%;
-    border-radius: 0 40px 0 40px;
-    height: 350px;
+    border-radius: 0 2.5rem 0 2.5rem;
+    height: 21.875rem;
     object-fit: cover;
     display: block;
     margin: 0 auto;
@@ -177,23 +177,33 @@
   .footer {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 2rem;
     background-color: #8F91A4;
     color: rgb(0, 0, 0);
+    gap: 2rem;
   }
   
   .footer-section {
     flex: 1;
     padding: 0 1rem;
+    min-width: 0; /* Allow flex items to shrink */
   }
   
   .footer-section h3 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .footer-section p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
   }
   
   .footer-section ul {
     list-style: none;
+    padding: 0;
   }
   
   .footer-section ul li {
@@ -203,9 +213,132 @@
   .footer-section ul li a {
     text-decoration: none;
     color: rgb(0, 0, 0);
+    transition: color 0.3s ease;
   }
   
   .footer-section ul li a:hover {
     color: #F9000A;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 48rem) { /* 768px */
+    .navbar {
+      padding: 1rem;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .navbar ul {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .navbar ul li {
+      margin-left: 0;
+    }
+    
+    .hero {
+      height: 20rem;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .story-mission .container {
+      flex-direction: column;
+      padding: 2rem 1rem;
+      gap: 2rem;
+    }
+    
+    .story-mission .image img {
+      width: 100%;
+      max-width: 25rem;
+    }
+    
+    .core-values {
+      padding: 2rem 1rem;
+    }
+    
+    .core-values .container {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .core-values .image img {
+      width: 100%;
+      max-width: 25rem;
+    }
+    
+    .footer {
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    
+    .footer-section {
+      padding: 0;
+      width: 100%;
+    }
+    
+    .footer-section h3 {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-section p {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  @media (max-width: 30rem) { /* 480px */
+    .navbar .logo {
+      font-size: 1.2rem;
+    }
+    
+    .navbar .logo img {
+      width: 1.5rem;
+    }
+    
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .story-mission .text h2,
+    .core-values h2 {
+      font-size: 1.5rem;
+    }
+    
+    .values-text h3 {
+      font-size: 1.4rem;
+    }
+    
+    .footer {
+      padding: 1.5rem 0.75rem;
+      gap: 1.5rem;
+    }
+    
+    .footer-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-section p {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-section ul li {
+      margin-bottom: 0.4rem;
+    }
+    
+    .footer-section ul li a {
+      font-size: 0.9rem;
+    }
+    
+    .values-text h4 {
+      font-size: 1rem;
+    }
   }
   
