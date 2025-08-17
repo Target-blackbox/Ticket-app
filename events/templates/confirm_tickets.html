@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirm Tickets</title>
     <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
+    <link rel="stylesheet" href="{% static 'css/event_details.css' %}">
     <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
@@ -18,9 +19,19 @@
 
     <h2>Confirm Your Tickets for {{ event.title }}</h2>
     <div style="text-align: left; margin: 20px;">
-        <button class="modify-btn" onclick="window.location.href='{% url 'events:select_tickets' event.id %}'">
+        <button class="modify-btn" onclick="openTicketModal()">
             Modify Tickets
         </button>
+    </div>
+
+    <!-- Ticket Selection Modal -->
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
     </div>
 
     {% if ticket_details %}
@@ -53,4 +64,143 @@
     <p>No tickets selected. <a href="{% url 'events:select_tickets' event.id %}">Go back</a> and choose tickets.</p>
     {% endif %}
 
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('ticketModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Open modal function
+        function openTicketModal() {
+            const eventId = {{ event.id }};
+            
+            // Load ticket selection content via AJAX
+            fetch(`/events/${eventId}/select_tickets_modal/`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modalContent').innerHTML = html;
+                    modal.style.display = 'block';
+                    
+                    // Initialize the ticket selection functionality
+                    initializeTicketSelection();
+                    // Initialize the form submission handler
+                    initializeModalForm();
+                })
+                .catch(error => {
+                    console.error('Error loading modal content:', error);
+                });
+        }
+
+        // Close modal when X is clicked
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Close modal function
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Initialize ticket selection functionality
+        function initializeTicketSelection() {
+            const ticketInputs = document.querySelectorAll(".ticket-quantity");
+            const totalAmountEl = document.getElementById("totalAmount");
+
+            function updateSubtotal() {
+                let totalAmount = 0;
+
+                ticketInputs.forEach(input => {
+                    const quantity = parseInt(input.value) || 0;
+                    const price = parseFloat(input.dataset.price);
+                    const fee = parseFloat(input.dataset.fee || 0);
+                    const subtotal = (price + fee) * quantity;
+
+                    const subtotalEl = document.getElementById(`subtotal_${input.name.split("_")[1]}`);
+                    if (subtotalEl) {
+                        subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
+                    }
+                    totalAmount += subtotal;
+                });
+
+                if (totalAmountEl) {
+                    totalAmountEl.textContent = totalAmount.toFixed(2);
+                }
+            }
+
+            ticketInputs.forEach(input => {
+                input.addEventListener("input", updateSubtotal);
+            });
+
+            document.querySelectorAll(".increase").forEach(button => {
+                button.addEventListener("click", function () {
+                    let input = this.previousElementSibling;
+                    let max = parseInt(input.max);
+                    let value = parseInt(input.value) || 0;
+                    if (value < max) {
+                        input.value = value + 1;
+                        updateSubtotal();
+                    }
+                });
+            });
+
+            document.querySelectorAll(".decrease").forEach(button => {
+                button.addEventListener("click", function () {
+                    let input = this.nextElementSibling;
+                    let value = parseInt(input.value) || 0;
+                    if (value > 0) {
+                        input.value = value - 1;
+                        updateSubtotal();
+                    }
+                });
+            });
+
+            updateSubtotal();
+        }
+
+        // Handle modal form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Submit form via AJAX
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => {
+                if (response.redirected) {
+                    // If there's a redirect, follow it
+                    window.location.href = response.url;
+                } else {
+                    // If no redirect, close modal and refresh page
+                    modal.style.display = 'none';
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                // Fallback to normal form submission
+                form.submit();
+            });
+        }
+
+        // Add form submission handler to modal content
+        function initializeModalForm() {
+            const modalForm = document.getElementById('ticketForm');
+            if (modalForm) {
+                modalForm.addEventListener('submit', handleFormSubmit);
+            }
+        }
+    </script>
 </body>

@@ -125,6 +125,16 @@ def select_tickets(request, event_id):
 
     return render(request, 'select_tickets.html', {'event': event, 'tickets': tickets})
 
+def select_tickets_modal(request, event_id):
+    """View for modal ticket selection content"""
+    event = get_object_or_404(Event, id=event_id)
+    tickets = Ticket.objects.filter(event=event)
+    
+    return render(request, 'select_tickets_modal.html', {
+        'event': event, 
+        'tickets': tickets
+    })
+
 def confirm_tickets(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     tickets = Ticket.objects.filter(event=event)
@@ -188,7 +198,12 @@ def payment_view(request, event_id):
     restore_tickets_timer[event_id] = threading.Timer(200, restore_tickets)
     restore_tickets_timer[event_id].start()
 
-    return render(request, "payment.html", {"ticket_details": ticket_details, "total_amount": total_amount, "event": event})
+    return render(request, "payment.html", {
+        "ticket_details": ticket_details, 
+        "total_amount": total_amount, 
+        "event": event,
+        "razorpay_key_id": settings.RAZORPAY_KEY_ID
+    })
 
 
 logger = logging.getLogger(__name__)  # Create a logger

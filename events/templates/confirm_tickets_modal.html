@@ -1,0 +1,70 @@
+{% if messages %}
+<div class="messages" id="message-container">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <button type="button" onclick="closeModal()" style="background-color: #FF6200; color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.25rem; cursor: pointer;">← Back</button>
+    <h2 style="margin: 0;">Confirm Your Tickets for {{ event.title }}</h2>
+    <div style="width: 80px;"></div> <!-- Spacer for centering -->
+</div>
+
+{% if ticket_details %}
+<table border="5">
+    <tr>
+        <th>Ticket Type</th>
+        <th>Quantity</th>
+        <th>Price (₹)</th>
+        <th>Additional Fee (₹)</th>
+        <th>Subtotal (₹)</th>
+    </tr>
+    {% for ticket_info in ticket_details %}
+    <tr>
+        <td><b>{{ ticket_info.ticket.ticket_name }}</b></td>
+        <td>{{ ticket_info.quantity }}</td>
+        <td>₹{{ ticket_info.ticket.price }}</td>
+        <td>₹{{ ticket_info.ticket.additional_fee|default:"0" }}</td>
+        <td>₹{{ ticket_info.subtotal }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total Amount: ₹{{ total_amount }}</h3>
+
+<div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+    <button type="button" onclick="openModifyModal()" style="background-color: #FF6200; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 0.25rem; cursor: pointer;">Modify Tickets</button>
+    <a href="{% url 'events:payment' event_id=event.id %}" class="proceed-button" style="background-color: #28a745; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 0.25rem; display: inline-block;">Proceed to Payment</a>
+</div>
+
+{% else %}
+<p>No tickets selected. <button type="button" onclick="openModifyModal()" style="background-color: #FF6200; color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.25rem; cursor: pointer;">Go back</button> and choose tickets.</p>
+{% endif %}
+
+<script>
+function openModifyModal() {
+    // Close current modal
+    closeModal();
+    
+    // Open ticket selection modal
+    const eventId = {{ event.id }};
+    const ticketModal = document.getElementById('ticketModal');
+    
+    fetch(`/events/${eventId}/select_tickets_modal/`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('modalContent').innerHTML = html;
+            ticketModal.style.display = 'block';
+            
+            // Initialize the ticket selection functionality
+            initializeTicketSelection();
+            // Initialize the form submission handler
+            initializeModalForm();
+        })
+        .catch(error => {
+            console.error('Error loading modal content:', error);
+        });
+}
+</script>

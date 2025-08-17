@@ -8,6 +8,7 @@ urlpatterns = [
     path('create/', views.create_event, name='event_creation'),
     path('event/<int:event_id>/', views.event_detail, name='event_detail'),
     path('select_tickets/<int:event_id>/', views.select_tickets, name='select_tickets'),
+    path('<int:event_id>/select_tickets_modal/', views.select_tickets_modal, name='select_tickets_modal'),
     path('confirm-tickets/<int:event_id>/', views.confirm_tickets, name='confirm_tickets'),
     path("payment/<int:event_id>/", views.payment_view, name="payment"),  # Fix: Pass event_id here
     path("payment-success/", views.payment_success, name="payment_success"),

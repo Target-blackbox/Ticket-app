@@ -151,3 +151,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'akhildevreddy207@gmail.com'
 EMAIL_HOST_PASSWORD = 'ijtm zvmc ikvq ylrb'  # Use app password for Gmail
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Razorpay Configuration
+RAZORPAY_KEY_ID = 'rzp_test_R6KOwsL8NdDQuq'
+RAZORPAY_KEY_SECRET = 'KfDo1FbYo2kl88zdqEAZRU8k'

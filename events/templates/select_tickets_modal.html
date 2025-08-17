@@ -1,0 +1,54 @@
+{% if messages %}
+<div class="messages" id="message-container">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <button type="button" onclick="closeModal()" style="background-color: #FF6200; color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.25rem; cursor: pointer;">← Back</button>
+    <h2 style="margin: 0;">Select Tickets for {{ event.title }}</h2>
+    <div style="width: 80px;"></div> <!-- Spacer for centering -->
+</div>
+
+<p><b><u>Location:</u></b> {{ event.location }}</p>
+<p><b><u>Start Date:</u></b> {{ event.start_date }}</p>
+
+<form method="post" action="{% url 'events:select_tickets' event_id=event.id %}" id="ticketForm">
+    {% csrf_token %}
+    <table border="5">
+        <tr>
+            <th>Ticket Type</th>
+            <th>Price</th>
+            <th>Additional Fee</th>
+            <th>Quantity</th>
+            <th>Available</th>
+            <th>Subtotal</th>
+        </tr>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.ticket_name }}</td>
+            <td>₹{{ ticket.price }}</td>
+            <td>₹{{ ticket.additional_fee|default:"0" }}</td>
+            <td>
+                <div class="ticket-quantity-wrapper">
+                    <button type="button" class="quantity-btn decrease">−</button>
+                    <input type="number" name="ticket_{{ ticket.id }}" 
+                           min="0" max="{{ ticket.max_purchase }}" 
+                           value="0" class="ticket-quantity" 
+                           data-price="{{ ticket.price }}" 
+                           data-fee="{{ ticket.additional_fee|default:0 }}">
+                    <button type="button" class="quantity-btn increase">+</button>
+                </div>
+            </td>
+            <td>Total {{ticket.ticket_name}}:{{ ticket.quantity }}</td>
+            <td id="subtotal_{{ ticket.id }}">₹0.00</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Total Amount: ₹<span id="totalAmount">0.00</span></h3>
+
+    <button class="s-btn" type="submit">Continue</button>
+</form>
